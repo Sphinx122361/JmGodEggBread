@@ -1,0 +1,476 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-image: url("background-picture.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+p {
+    color: white;
+    text-shadow: 1px 1px 3px black;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+    font-weight: 500;
+    -webkit-tap-highlight-color: transparent;
+}
+
+h1 {
+    font-family: "Fredoka", sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    height: auto;
+    overflow-wrap: anywhere;
+}
+
+.lugo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.lugo p {
+    margin: 5px 0;
+}
+
+.lugo-img {
+    width: 40px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.lugo_2-img {
+    width: 65px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 15px 0 25px;
+}
+
+.nav a {
+    color: #FFD580;
+    text-shadow: 1px 1px 3px black;
+    font-size: 14px;
+    padding: 8px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav_2 {
+    position: static;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px black;
+}
+
+.nav_2 p {
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+}
+
+.contact-info {
+    color: white;
+    font-size: 12px;
+    text-shadow: 1px 1px 3px black;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.contact-info h2,
+.contact-info p {
+    margin: 0;
+}
+
+.call-img,
+.Email-img,
+.facebook-img {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    object-fit: contain;
+}
+
+.eggpie {
+    display: block;
+    width: 250px;
+    max-width: 100%;
+    height: auto;
+    margin: 30px auto;
+    object-fit: contain;
+}
+
+.Product-img {
+    display: block;
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+    margin: 30px auto;
+    object-fit: contain;
+}
+
+.product-details {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    color: #3E2415;
+    overflow-wrap: anywhere;
+}
+
+.info-section {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 25px;
+    padding: 0 10px;
+}
+
+.info-section h2 {
+    font-family: "Fredoka", sans-serif;
+    font-size: 22px;
+    margin-top: 25px;
+    text-align: center;
+    color: #6B3E26;
+}
+
+.info-section p {
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #6B3E26;
+    text-align: center;
+    text-shadow: none;
+}
+
+.info-section p strong {
+    color: #D98B3A;
+    font-family: "Fredoka", sans-serif;
+}
+
+.info-section ul,
+.info-section ol {
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    color: #3E2415;
+    line-height: 1.8;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 28px;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.ingredients-section h3 {
+    font-family: "Fredoka", sans-serif;
+    color: #6B3E26;
+    font-size: 22px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.ingredients-section ol {
+    font-family: "Poppins", sans-serif;
+    color: #3E2415;
+    font-size: 15px;
+    line-height: 1.8;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 28px;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.about-us {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.about-us h1 {
+    font-family: "Lilita One", sans-serif;
+    color: #D98B3A;
+    height: auto;
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.about-us h2 {
+    font-family: "Fredoka", sans-serif;
+    color: #6B3E26;
+    font-size: 22px;
+    text-align: center;
+}
+
+.about-us p {
+    color: #6B3E26;
+    text-shadow: none;
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.about-us h4 {
+    font-family: "Fredoka", sans-serif;
+    color: #6B3E26;
+    font-size: 22px;
+    margin-top: 25px;
+}
+
+.objectives {
+    font-family: "Fredoka", sans-serif;
+    color: #6B3E26;
+    font-size: 17px;
+    line-height: 1.8;
+    text-align: left;
+    padding-left: 25px;
+    overflow-wrap: anywhere;
+}
+
+.back-button {
+    display: block;
+    width: 170px;
+    max-width: 100%;
+    min-height: 44px;
+    margin: 30px auto;
+    padding: 12px;
+    text-align: center;
+    color: white;
+    background-color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    text-shadow: none;
+}
+
+.customers {
+    width: 100%;
+    text-align: center;
+    margin: 30px auto;
+}
+
+.customers p {
+    font-family: "Fredoka", sans-serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.customer-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.customer-images img {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        padding: 12px;
+        background-attachment: scroll;
+    }
+
+    .lugo {
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .lugo p {
+        font-size: 16px;
+    }
+
+    .lugo-img {
+        width: 35px;
+    }
+
+    .lugo_2-img {
+        width: 55px;
+    }
+
+    .nav {
+        justify-content: center;
+        gap: 5px;
+        margin: 15px 0 20px;
+    }
+
+    .nav a {
+        font-size: 13px;
+        padding: 8px 5px;
+        min-height: 44px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .Product-img {
+        width: 100%;
+        max-width: 350px;
+        margin: 20px auto;
+    }
+
+    .eggpie {
+        width: 220px;
+        margin: 20px auto;
+    }
+
+    .product-details,
+    .info-section,
+    .about-us {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .about-us {
+        margin: 20px auto;
+        padding: 10px 5px;
+    }
+
+    .about-us h1 {
+        font-size: 30px;
+    }
+
+    .about-us h2,
+    .info-section h2,
+    .ingredients-section h3 {
+        font-size: 20px;
+    }
+
+    .about-us p,
+    .info-section p {
+        font-size: 14px;
+    }
+
+    .objectives,
+    .info-section ul,
+    .info-section ol,
+    .ingredients-section ol {
+        font-size: 14px;
+        line-height: 1.7;
+        padding-left: 22px;
+    }
+
+    .contact {
+        justify-content: center;
+    }
+
+    .contact-info {
+        font-size: 12px;
+    }
+
+    .customers p {
+        font-size: 20px;
+    }
+
+    .customer-images {
+        gap: 8px;
+    }
+
+    .customer-images img {
+        width: 30%;
+        max-width: 110px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    body {
+        padding: 8px;
+    }
+
+    .nav {
+        gap: 3px;
+    }
+
+    .nav a {
+        font-size: 12px;
+        padding: 7px 4px;
+    }
+
+    .about-us h1 {
+        font-size: 27px;
+    }
+
+    .about-us h2,
+    .info-section h2 {
+        font-size: 18px;
+    }
+
+    .objectives,
+    .info-section ul,
+    .info-section ol,
+    .ingredients-section ol {
+        font-size: 13px;
+    }
+
+    .customer-images img {
+        width: 45%;
+        max-width: 130px;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    body {
+        padding: 16px;
+    }
+
+    .Product-img {
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .product-details,
+    .info-section,
+    .about-us {
+        max-width: 90%;
+    }
+}

@@ -1,0 +1,721 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --brown: #6B3E26;
+    --dark-brown: #3E2415;
+    --orange: #D98B3A;
+    --cream: #fff8ed;
+    --white: #ffffff;
+    --nav-gold: #FFD580;
+}
+
+html {
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 20px;
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: var(--cream);
+    background-image: url("background-picture.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+p {
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+a {
+    color: blue;
+    font-weight: 500;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #2d65c8;
+    outline-offset: 3px;
+}
+
+h1 {
+    margin: 20px 0;
+    color: white;
+    font-family: "Fredoka", sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    overflow-wrap: anywhere;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.lugo-img {
+    width: 40px;
+    object-fit: contain;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 25px;
+}
+
+.nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 8px 10px;
+    color: var(--nav-gold);
+    font-size: 14px;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] {
+    text-decoration: underline;
+}
+
+.nav .nav-order {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #6b8e23;
+    color: white;
+    text-shadow: none;
+}
+
+.eggpie {
+    width: 250px;
+    margin: 30px auto;
+    object-fit: contain;
+}
+
+.nav_2 {
+    margin: 25px 0;
+    padding-left: 30px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.lugo_2-img {
+    width: 65px;
+    margin: 0;
+    object-fit: contain;
+}
+
+.nav_2 p {
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+.nav_2 .brand-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 35px 0 10px;
+    padding-left: 30px;
+    color: white;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.contact-info {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.contact-info h2 {
+    margin: 0 0 12px;
+    font-size: 18px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.contact-item a {
+    color: white;
+}
+
+.call-img,
+.Email-img,
+.facebook-img {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.Product-img {
+    width: 400px;
+    margin: 30px auto;
+    object-fit: contain;
+}
+
+.info-section,
+.product-details {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 25px;
+    padding: 0 10px;
+    overflow-wrap: anywhere;
+}
+
+.info-section h2 {
+    margin: 25px 0 15px;
+    color: var(--brown);
+    font-family: "Fredoka", sans-serif;
+    font-size: 22px;
+    text-align: center;
+}
+
+.info-section p {
+    color: var(--brown);
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.info-section p strong {
+    color: var(--orange);
+    font-family: "Fredoka", sans-serif;
+}
+
+.info-section ul,
+.info-section ol {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 28px;
+    color: var(--dark-brown);
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.ingredients-section h3 {
+    margin: 25px 0 12px;
+    color: var(--brown);
+    font-family: "Fredoka", sans-serif;
+    font-size: 22px;
+    text-align: center;
+}
+
+.ingredients-section ol {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 28px;
+    color: var(--dark-brown);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.about-us {
+    width: 100%;
+    max-width: 700px;
+    margin: 35px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.about-us h1 {
+    color: var(--orange);
+    font-family: "Lilita One", sans-serif;
+    font-size: 35px;
+}
+
+.about-us h2,
+.about-us .section-heading {
+    color: var(--brown);
+    font-family: "Fredoka", sans-serif;
+    font-size: 22px;
+}
+
+.about-us p {
+    color: var(--brown);
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.objectives {
+    padding-left: 25px;
+    color: var(--brown);
+    font-family: "Fredoka", sans-serif;
+    font-size: 17px;
+    line-height: 1.8;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.ManagementTeam,
+.ExecutiveSummary,
+.MarketAnalysis,
+.IngredientCost,
+.ProductTesting,
+.WebPlanning {
+    width: 100%;
+    max-width: 800px;
+    margin: 35px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.ManagementTeam {
+    background: transparent;
+}
+
+.ManagementTeam h2 {
+    margin: 20px 0;
+    color: var(--brown);
+    font-family: "Lilita One", sans-serif;
+    font-size: 28px;
+}
+
+.ManagementTeam img,
+.IngredientCost img,
+.ProductTesting img,
+.WebPlanning img {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.ManagementTeam img + img {
+    max-width: 450px;
+}
+
+.ExecutiveSummary h2,
+.MarketAnalysis h2,
+.IngredientCost h2,
+.ProductTesting h2,
+.WebPlanning h2 {
+    margin-bottom: 25px;
+    color: var(--orange);
+    font-family: "Lilita One", sans-serif;
+    font-size: 30px;
+}
+
+.ExecutiveSummary p,
+.MarketAnalysis p {
+    color: var(--brown);
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.MarketAnalysis h3,
+.IngredientCost h3,
+.ProductTesting h3 {
+    margin: 25px 0 15px;
+    color: var(--brown);
+    font-family: "Fredoka", sans-serif;
+    font-size: 22px;
+}
+
+.company-history-product,
+.SwotAnalysis,
+.OperationPlan {
+    width: 100%;
+    max-width: 800px;
+    margin: 35px auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.company-history-product h4 {
+    margin: 30px 0 12px;
+    color: var(--brown);
+    font-family: "Fredoka", sans-serif;
+    font-size: 22px;
+    text-align: center;
+}
+
+.company-history-product p,
+.SwotAnalysis li,
+.OperationPlan p {
+    color: var(--brown);
+    line-height: 1.8;
+}
+
+.SwotAnalysis h2,
+.OperationPlan h2 {
+    color: var(--orange);
+    font-family: "Lilita One", sans-serif;
+}
+
+.SwotAnalysis h3,
+.OperationPlan h3 {
+    color: var(--brown);
+    font-family: "Fredoka", sans-serif;
+}
+
+.customers {
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.customers h2 {
+    margin-bottom: 20px;
+    color: var(--brown);
+    font-family: "Fredoka", sans-serif;
+    font-size: 22px;
+}
+
+.customer-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.customer-images img {
+    width: 150px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.back-button {
+    display: block;
+    width: 190px;
+    max-width: 100%;
+    min-height: 44px;
+    margin: 25px auto;
+    padding: 12px;
+    border-radius: 8px;
+    background: #333;
+    color: white;
+    text-align: center;
+    text-shadow: none;
+}
+
+.order-page {
+    background-color: var(--cream);
+}
+
+.order-box {
+    width: 100%;
+    max-width: 430px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+.order-box h1 {
+    margin-top: 0;
+    color: var(--brown);
+    text-shadow: none;
+}
+
+.order-intro {
+    color: var(--brown);
+    text-align: center;
+}
+
+.order-box label {
+    display: block;
+    margin-top: 12px;
+    color: var(--dark-brown);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.order-box input {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin: 6px 0 10px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    font: inherit;
+    font-size: 14px;
+}
+
+.order-btn,
+.copy-order-btn {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 10px;
+    padding: 12px;
+    border: 0;
+    border-radius: 8px;
+    background: #535fc5;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.order-btn:hover,
+.copy-order-btn:hover {
+    background: #3544a8;
+}
+
+#orderMessage {
+    min-height: 25px;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.order-summary {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f8f8f8;
+    color: #222;
+    font-size: 14px;
+    line-height: 1.7;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.order-note {
+    color: #555;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .site-header {
+        justify-content: center;
+    }
+
+    .brand {
+        justify-content: center;
+    }
+
+    .nav {
+        justify-content: center;
+        gap: 4px;
+        margin: 12px 0 20px;
+    }
+
+    .nav a {
+        padding: 8px 6px;
+        font-size: 13px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .eggpie {
+        width: 220px;
+        margin: 20px auto;
+    }
+
+    .Product-img {
+        width: 100%;
+        max-width: 350px;
+        margin: 20px auto;
+    }
+
+    .info-section,
+    .about-us,
+    .product-details {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .about-us {
+        margin: 20px auto;
+        padding: 10px 5px;
+    }
+
+    .about-us h1 {
+        font-size: 30px;
+    }
+
+    .about-us h2,
+    .info-section h2,
+    .ingredients-section h3 {
+        font-size: 20px;
+    }
+
+    .about-us p,
+    .info-section p,
+    .ExecutiveSummary p,
+    .MarketAnalysis p {
+        font-size: 14px;
+    }
+
+    .objectives,
+    .info-section ul,
+    .info-section ol,
+    .ingredients-section ol {
+        padding-left: 22px;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .ManagementTeam,
+    .ExecutiveSummary,
+    .MarketAnalysis,
+    .IngredientCost,
+    .ProductTesting,
+    .WebPlanning,
+    .SwotAnalysis,
+    .OperationPlan,
+    .company-history-product {
+        margin: 22px auto;
+        padding: 15px;
+    }
+
+    .ManagementTeam h2 {
+        font-size: 23px;
+    }
+
+    .ExecutiveSummary h2,
+    .MarketAnalysis h2,
+    .IngredientCost h2,
+    .ProductTesting h2,
+    .WebPlanning h2 {
+        font-size: 25px;
+    }
+
+    .MarketAnalysis h3,
+    .IngredientCost h3,
+    .ProductTesting h3 {
+        font-size: 20px;
+    }
+
+    .customer-images {
+        gap: 8px;
+    }
+
+    .customer-images img {
+        width: 30%;
+        max-width: 110px;
+    }
+
+    .order-box {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 360px) {
+    body {
+        padding: 8px;
+    }
+
+    .nav {
+        gap: 2px;
+    }
+
+    .nav a {
+        padding: 7px 4px;
+        font-size: 12px;
+    }
+
+    .about-us h1 {
+        font-size: 27px;
+    }
+
+    .about-us h2,
+    .info-section h2 {
+        font-size: 18px;
+    }
+
+    .objectives,
+    .info-section ul,
+    .info-section ol,
+    .ingredients-section ol {
+        font-size: 13px;
+    }
+
+    .customer-images img {
+        width: 45%;
+        max-width: 130px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    body {
+        padding: 16px;
+    }
+
+    .Product-img {
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .info-section,
+    .about-us,
+    .product-details {
+        max-width: 90%;
+    }
+}

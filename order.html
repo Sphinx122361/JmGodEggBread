@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order EggyBite | JM God Egg Bread</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body class="order-page">
+
+    <main class="order-box">
+        <h1>Order EggyBite</h1>
+
+        <p class="order-intro">
+            Enjoy our delicious EggyBite for only ₱20 each!
+        </p>
+
+        <form id="orderForm">
+            <label for="customerName">Your name</label>
+            <input
+                type="text"
+                id="customerName"
+                name="customerName"
+                placeholder="Your Name"
+                autocomplete="name"
+                required
+            >
+
+            <label for="quantity">Quantity</label>
+            <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                placeholder="Quantity"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                required
+            >
+
+            <label for="orderDetails">Pickup location or instructions</label>
+            <input
+                type="text"
+                id="orderDetails"
+                name="orderDetails"
+                placeholder="Pickup Location or Instructions"
+                required
+            >
+
+            <button type="submit" class="order-btn">
+                Order Us
+            </button>
+        </form>
+
+        <p id="orderMessage" role="status" aria-live="polite"></p>
+
+        <div id="orderSummary" class="order-summary" hidden></div>
+
+        <button type="button" id="copyOrder" class="copy-order-btn" hidden>
+            Copy Order Details
+        </button>
+
+        <p class="order-note">
+            Messenger will open in a new tab. Copy your order details,
+            paste them into the chat, and press Send. Your order is not
+            submitted until you send the message.
+        </p>
+
+        <a href="index.html" class="back-button">← Back to Home</a>
+    </main>
+
+</body>
+</html>

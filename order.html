@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer></script>
 </head>
+
 <body class="order-page">
 
     <main class="order-box">
+
         <h1>Order EggyBite</h1>
 
         <p class="order-intro">
@@ -60,46 +62,9 @@
                     Select Payment Method
                 </option>
 
-                <option value="GCash Demo">
-                    GCash
-                </option>
-
-                <option value="Cash on Pickup">
-                    Cash on Delivery
-                </option>
+                <option value="GCash Demo">GCash</option>
+                <option value="Cash on Pickup">Cash on Delivery</option>
             </select>
-
-            <div id="gcashPayment" class="gcash-payment" hidden>
-
-                <div class="gcash-header">
-                    <h2>GCash Payment</h2>
-                    
-                </div>
-
-                
-
-                <div class="gcash-details">
-                    <h3>JM God Egg Bread</h3>
-
-                    <p>Amount to Pay</p>
-                    <h2 id="gcashAmount">₱0.00</h2>
-                </div>
-
-                <p class="gcash-instruction">
-                    Click the button below to simulate a successful payment.
-                </p>
-
-                <button
-                    type="button"
-                    id="confirmPayment"
-                    class="gcash-confirm-btn"
-                >
-                    Confirm Payment
-                </button>
-
-                <p id="paymentStatus" role="status"></p>
-
-            </div>
 
             <button type="submit" class="order-btn" id="orderButton">
                 Order Us
@@ -115,15 +80,56 @@
             Copy Order Details
         </button>
 
-        <p class="order-note">
-            Messenger will open in a new tab. Copy your order details,
-            paste them into the chat, and press Send. Your order is not
-            submitted until you send the message.
-        </p>
+        
 
-        <a href="index.html" class="back-button">← Back to Home</a>
+        <a href="index.html" class="back-button">
+            ← Back to Home
+        </a>
 
     </main>
+
+    <div id="gcashPayment" class="gcash-modal" hidden>
+
+        <div class="gcash-modal-content">
+
+            <button
+                type="button"
+                id="closeGcash"
+                class="gcash-close"
+                aria-label="Close payment popup"
+            >
+                ×
+            </button>
+
+            <div class="gcash-header">
+                <h2>GCash Payment</h2>
+            </div>
+
+            <div class="gcash-details">
+
+                <h3>JM God Egg Bread</h3>
+
+                <p>Amount to Pay</p>
+
+                <h2 id="gcashAmount">₱0.00</h2>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                id="confirmPayment"
+                class="gcash-confirm-btn"
+            >
+                Confirm Payment
+            </button>
+
+            <p id="paymentStatus" role="status"></p>
+
+        </div>
+
+    </div>
 
 </body>
 </html>

@@ -719,3 +719,97 @@ h1 {
         max-width: 90%;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+.gcash-payment {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f1f7ff;
+    border: 1px solid #c8ddf5;
+    border-radius: 15px;
+}
+
+.gcash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gcash-header h2 {
+    margin: 0;
+    color: #007dce;
+}
+
+.gcash-header span {
+    padding: 5px 12px;
+    background: #dceeff;
+    color: #007dce;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.gcash-note {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.gcash-details {
+    margin: 20px 0;
+    padding: 18px;
+    background: white;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.gcash-details p {
+    margin: 8px 0;
+    color: #777;
+    font-size: 13px;
+}
+
+.gcash-details h3 {
+    color: #007dce;
+}
+
+.gcash-details h2 {
+    color: #007dce;
+    font-size: 28px;
+}
+
+.gcash-instruction {
+    font-size: 13px;
+    text-align: center;
+}
+
+.gcash-confirm-btn {
+    width: 100%;
+    padding: 13px;
+    background: #007dce;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.gcash-confirm-btn:hover {
+    background: #0066aa;
+}
+
+#paymentStatus {
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+}

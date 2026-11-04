@@ -19,6 +19,7 @@ if (orderForm) {
     const gcashAmount = $("gcashAmount");
     const confirmPayment = $("confirmPayment");
     const paymentStatus = $("paymentStatus");
+    const closeGcash = $("closeGcash");
 
     let currentOrder = null;
     let currentOrderText = "";
@@ -51,10 +52,6 @@ if (orderForm) {
         copyButton.hidden = true;
     }
 
-
-
-
-
     function createOrder() {
         const name = nameInput.value.trim();
         const quantity = Number(quantityInput.value);
@@ -86,41 +83,28 @@ if (orderForm) {
         };
     }
 
+    function getPaymentMethod() {
+        const selectedOption =
+            paymentInput.options[paymentInput.selectedIndex];
 
+        const selectedPayment = (
+            paymentInput.value + " " +
+            (selectedOption?.textContent || "")
+        ).trim().toLowerCase();
 
-function getPaymentMethod() {
-    const selectedOption = paymentInput.options[paymentInput.selectedIndex];
+        if (selectedPayment.includes("gcash")) {
+            return "GCash";
+        }
 
-    const selectedPayment = (
-        paymentInput.value + " " +
-        (selectedOption?.textContent || "")
-    ).trim().toLowerCase();
+        if (
+            selectedPayment.includes("cash on delivery") ||
+            /\bcod\b/.test(selectedPayment)
+        ) {
+            return "Cash on Delivery";
+        }
 
-    if (selectedPayment.includes("gcash")) {
-        return "GCash";
+        return "";
     }
-
-    if (
-        selectedPayment.includes("cash on delivery") ||
-        /\bcod\b/.test(selectedPayment)
-    ) {
-        return "Cash on Delivery";
-    }
-
-    return "";
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
     function createOrderText(order, status) {
         return [
@@ -138,15 +122,13 @@ function getPaymentMethod() {
     function updatePaymentDisplay() {
         resetOrder();
 
-       const isGcash = getPaymentMethod() === "GCash";
+        gcashPayment.hidden = true;
 
-        gcashPayment.hidden = !isGcash;
-
-        if (isGcash) {
+        if (getPaymentMethod() === "GCash") {
             updateGcashAmount();
 
             showMessage(
-                "Review your order and confirm the payment.",
+                "Complete your order and click Order Us to continue.",
                 "#007dce"
             );
         } else {
@@ -154,10 +136,25 @@ function getPaymentMethod() {
         }
     }
 
+    function closeGcashPopup() {
+        gcashPayment.hidden = true;
+    }
+
     paymentInput.addEventListener(
         "change",
         updatePaymentDisplay
     );
+
+    closeGcash.addEventListener(
+        "click",
+        closeGcashPopup
+    );
+
+    gcashPayment.addEventListener("click", event => {
+        if (event.target === gcashPayment) {
+            closeGcashPopup();
+        }
+    });
 
     quantityInput.addEventListener("input", () => {
         updateGcashAmount();
@@ -179,10 +176,11 @@ function getPaymentMethod() {
         if (order.paymentMethod === "GCash") {
             updateGcashAmount();
 
-            showMessage(
-                "Your order is ready. Confirm your payment below.",
-                "#007dce"
-            );
+            paymentStatus.textContent = "";
+
+            gcashPayment.hidden = false;
+
+            showMessage("");
 
             return;
         }
@@ -205,7 +203,7 @@ function getPaymentMethod() {
         window.location.href = "cod_confirmation.html";
     });
 
-    confirmPayment?.addEventListener("click", () => {
+    confirmPayment.addEventListener("click", () => {
         if (
             !currentOrder ||
             currentOrder.paymentMethod !== "GCash"
@@ -263,3 +261,4 @@ function getPaymentMethod() {
     updateGcashAmount();
     updatePaymentDisplay();
 }
+

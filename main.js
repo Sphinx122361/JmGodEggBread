@@ -1,71 +1,265 @@
-const PRICE_PER_ITEM = 20;
-const MESSENGER_URL = "https://m.me/61594116885367";
+
+const PRICE_PER_ITEM = 15;
 
 const orderForm = document.getElementById("orderForm");
 
 if (orderForm) {
-    const nameInput = document.getElementById("customerName");
-    const quantityInput = document.getElementById("quantity");
-    const detailsInput = document.getElementById("orderDetails");
-    const message = document.getElementById("orderMessage");
-    const summary = document.getElementById("orderSummary");
-    const copyButton = document.getElementById("copyOrder");
+    const $ = id => document.getElementById(id);
 
+    const nameInput = $("customerName");
+    const quantityInput = $("quantity");
+    const detailsInput = $("orderDetails");
+    const paymentInput = $("paymentMethod");
+
+    const message = $("orderMessage");
+    const summary = $("orderSummary");
+    const copyButton = $("copyOrder");
+
+    const gcashPayment = $("gcashPayment");
+    const gcashAmount = $("gcashAmount");
+    const confirmPayment = $("confirmPayment");
+    const paymentStatus = $("paymentStatus");
+
+    let currentOrder = null;
     let currentOrderText = "";
 
-    orderForm.addEventListener("submit", function(event) {
-        event.preventDefault();
+    function showMessage(text, color = "#333") {
+        message.textContent = text;
+        message.style.color = color;
+    }
 
+    function calculateTotal() {
+        const quantity = Number(quantityInput.value);
+
+        return Number.isInteger(quantity) && quantity > 0
+            ? quantity * PRICE_PER_ITEM
+            : 0;
+    }
+
+    function updateGcashAmount() {
+        gcashAmount.textContent =
+            `₱${calculateTotal().toFixed(2)}`;
+    }
+
+    function resetOrder() {
+        currentOrder = null;
+        currentOrderText = "";
+
+        paymentStatus.textContent = "";
+        summary.textContent = "";
+        summary.hidden = true;
+        copyButton.hidden = true;
+    }
+
+
+
+
+
+    function createOrder() {
         const name = nameInput.value.trim();
         const quantity = Number(quantityInput.value);
         const details = detailsInput.value.trim();
 
-        if (!name || !Number.isInteger(quantity) || quantity < 1 || !details) {
-            message.textContent = "Please complete all fields correctly.";
-            message.style.color = "#b42318";
-            return;
+        const paymentMethod = getPaymentMethod();
+
+        if (
+            !name ||
+            !Number.isInteger(quantity) ||
+            quantity < 1 ||
+            !details ||
+            !paymentMethod
+        ) {
+            showMessage(
+                "Please complete all fields correctly.",
+                "#b42318"
+            );
+            return null;
         }
 
-        const total = quantity * PRICE_PER_ITEM;
+        return {
+            orderNumber: `EGG-${Date.now()}`,
+            customerName: name,
+            quantity,
+            details,
+            total: quantity * PRICE_PER_ITEM,
+            paymentMethod
+        };
+    }
 
-        currentOrderText = [
+
+
+function getPaymentMethod() {
+    const selectedOption = paymentInput.options[paymentInput.selectedIndex];
+
+    const selectedPayment = (
+        paymentInput.value + " " +
+        (selectedOption?.textContent || "")
+    ).trim().toLowerCase();
+
+    if (selectedPayment.includes("gcash")) {
+        return "GCash";
+    }
+
+    if (
+        selectedPayment.includes("cash on delivery") ||
+        /\bcod\b/.test(selectedPayment)
+    ) {
+        return "Cash on Delivery";
+    }
+
+    return "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function createOrderText(order, status) {
+        return [
             "Hello! I want to order EggyBite.",
-            "Name: " + name,
-            "Quantity: " + quantity,
-            "Total: PHP " + total,
-            "Pickup details: " + details
+            `Order Number: ${order.orderNumber}`,
+            `Name: ${order.customerName}`,
+            `Quantity: ${order.quantity}`,
+            `Total: PHP ${order.total.toFixed(2)}`,
+            `Pickup details: ${order.details}`,
+            `Payment Method: ${order.paymentMethod}`,
+            `Payment Status: ${status}`
         ].join("\n");
+    }
 
-        summary.textContent = currentOrderText;
-        summary.hidden = false;
-        copyButton.hidden = false;
+    function updatePaymentDisplay() {
+        resetOrder();
 
-        message.textContent =
-            "Your total is PHP " + total +
-            ". Copy your order details, then send them in Messenger.";
+       const isGcash = getPaymentMethod() === "GCash";
 
-        message.style.color = "#245b2a";
+        gcashPayment.hidden = !isGcash;
 
-        window.open(MESSENGER_URL, "_blank", "noopener,noreferrer");
+        if (isGcash) {
+            updateGcashAmount();
+
+            showMessage(
+                "Review your order and confirm the payment.",
+                "#007dce"
+            );
+        } else {
+            showMessage("");
+        }
+    }
+
+    paymentInput.addEventListener(
+        "change",
+        updatePaymentDisplay
+    );
+
+    quantityInput.addEventListener("input", () => {
+        updateGcashAmount();
+        resetOrder();
     });
 
-    copyButton.addEventListener("click", async function() {
-        if (!currentOrderText) {
+    nameInput.addEventListener("input", resetOrder);
+    detailsInput.addEventListener("input", resetOrder);
+
+    orderForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const order = createOrder();
+
+        if (!order) return;
+
+        currentOrder = order;
+
+        if (order.paymentMethod === "GCash") {
+            updateGcashAmount();
+
+            showMessage(
+                "Your order is ready. Confirm your payment below.",
+                "#007dce"
+            );
+
             return;
         }
+
+        const codOrder = {
+            ...order,
+            status: "UNPAID",
+            orderText: createOrderText(
+                order,
+                "UNPAID - CASH ON DELIVERY"
+            ),
+            date: new Date().toLocaleString()
+        };
+
+        sessionStorage.setItem(
+            "codOrder",
+            JSON.stringify(codOrder)
+        );
+
+        window.location.href = "cod_confirmation.html";
+    });
+
+    confirmPayment?.addEventListener("click", () => {
+        if (
+            !currentOrder ||
+            currentOrder.paymentMethod !== "GCash"
+        ) {
+            showMessage(
+                "Please complete your order first.",
+                "#b42318"
+            );
+            return;
+        }
+
+        const payment = {
+            ...currentOrder,
+            status: "PAID",
+            orderText: createOrderText(
+                currentOrder,
+                "PAID"
+            ),
+            date: new Date().toLocaleString()
+        };
+
+        sessionStorage.setItem(
+            "demoPayment",
+            JSON.stringify(payment)
+        );
+
+        paymentStatus.textContent =
+            "Payment successful! Redirecting...";
+
+        paymentStatus.style.color = "#20a65a";
+
+        window.location.href = "payment_result.html";
+    });
+
+    copyButton?.addEventListener("click", async () => {
+        if (!currentOrderText) return;
 
         try {
-            await navigator.clipboard.writeText(currentOrderText);
+            await navigator.clipboard.writeText(
+                currentOrderText
+            );
 
-            message.textContent =
-                "Order details copied. Paste them into Messenger and press Send.";
-
-            message.style.color = "#245b2a";
-        } catch (error) {
-            message.textContent =
-                "Select and copy the order details shown above, then paste them into Messenger.";
-
-            message.style.color = "#8a4b08";
+            showMessage(
+                "Order details copied successfully!",
+                "#245b2a"
+            );
+        } catch {
+            showMessage(
+                "Select and copy the order details shown above.",
+                "#8a4b08"
+            );
         }
     });
+
+    updateGcashAmount();
+    updatePaymentDisplay();
 }

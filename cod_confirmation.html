@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Confirmation | JM God Egg Bread</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #f4f7fb;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        .result-box {
+            width: 100%;
+            max-width: 450px;
+            padding: 35px 25px;
+            background: white;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: #e5f8ec;
+            color: #20a65a;
+            font-size: 48px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 28px;
+            color: #20a65a;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cod-label {
+            display: inline-block;
+            padding: 6px 15px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            background: #e5f8ec;
+            color: #208044;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .amount-section {
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f0f7ff;
+            border-radius: 15px;
+        }
+
+        .amount-section p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .amount-section h2 {
+            margin-top: 5px;
+            color: #007dce;
+            font-size: 32px;
+        }
+
+        .details {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        .detail-row span:first-child {
+            color: #777;
+        }
+
+        .detail-row span:last-child {
+            text-align: right;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .unpaid-status {
+            color: #c27a00;
+        }
+
+        .order-text {
+            width: 100%;
+            min-height: 130px;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fafafa;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            line-height: 1.6;
+            resize: vertical;
+            color: #555;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .messenger-btn {
+            background: #1877f2;
+        }
+
+        .messenger-btn:hover {
+            background: #1264d6;
+        }
+
+        .copy-btn {
+            background: #20a65a;
+        }
+
+        .copy-btn:hover {
+            background: #188448;
+        }
+
+        .back-btn {
+            background: #007dce;
+        }
+
+        .back-btn:hover {
+            background: #0066aa;
+        }
+
+        .school-note {
+            margin-top: 18px;
+            color: #999;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .error-message {
+            color: #c0392b;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="result-box">
+
+        <div class="success-icon" id="successIcon">✓</div>
+
+        <h1 id="resultTitle">Order Confirmed!</h1>
+
+        <p class="subtitle">
+            Your order has been placed successfully.
+            Please prepare your payment upon delivery.
+        </p>
+
+        <span class="cod-label">CASH ON DELIVERY</span>
+
+        <div id="resultContent">
+
+            <div class="amount-section">
+                <p>Total Amount to Pay</p>
+                <h2 id="totalAmount">₱0.00</h2>
+            </div>
+
+            <div class="details">
+
+                <div class="detail-row">
+                    <span>Order Number</span>
+                    <span id="orderNumber">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Customer</span>
+                    <span id="customerName">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Quantity</span>
+                    <span id="quantity">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Payment Method</span>
+                    <span>Cash on Delivery</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Payment Status</span>
+                    <span class="unpaid-status">UNPAID</span>
+                </div>
+
+            </div>
+
+            <textarea
+                id="orderText"
+                class="order-text"
+                readonly
+            ></textarea>
+
+            <button
+                type="button"
+                class="action-btn messenger-btn"
+                id="messengerButton"
+            >
+                Open Messenger
+            </button>
+
+            <button
+                type="button"
+                class="action-btn copy-btn"
+                id="copyButton"
+            >
+                Copy Order Details
+            </button>
+
+            <a href="index.html" class="action-btn back-btn">
+                Back to Home
+            </a>
+
+        </div>
+
+        <p class="school-note">
+            This is a simulated ordering system for educational
+            purposes only. Payment will be collected upon delivery.
+        </p>
+
+    </main>
+
+    <script>
+        const MESSENGER_URL = "https://m.me/61594116885367";
+
+        const payment = JSON.parse(
+            sessionStorage.getItem("codOrder") || "null"
+        );
+
+        const resultContent =
+            document.getElementById("resultContent");
+
+        function showError() {
+            document.getElementById("successIcon").textContent = "!";
+            document.getElementById("successIcon").style.background = "#fdeaea";
+            document.getElementById("successIcon").style.color = "#c0392b";
+
+            document.getElementById("resultTitle").textContent =
+                "Order Not Found";
+
+            document.getElementById("resultTitle").style.color =
+                "#c0392b";
+
+            resultContent.innerHTML = `
+                <p class="error-message">
+                    We could not find your order.
+                    Please place your order first.
+                </p>
+
+                <a href="order.html" class="action-btn back-btn">
+                    Return to Order
+                </a>
+            `;
+        }
+
+        function displayOrder() {
+            if (
+                !payment ||
+                payment.status !== "UNPAID" ||
+                payment.paymentMethod !== "Cash on Delivery" ||
+                !Number.isFinite(Number(payment.total)) ||
+                !payment.orderNumber ||
+                !payment.customerName ||
+                !payment.quantity
+            ) {
+                showError();
+                return;
+            }
+
+            document.getElementById("totalAmount").textContent =
+                `₱${Number(payment.total).toFixed(2)}`;
+
+            document.getElementById("orderNumber").textContent =
+                payment.orderNumber;
+
+            document.getElementById("customerName").textContent =
+                payment.customerName;
+
+            document.getElementById("quantity").textContent =
+                payment.quantity;
+
+            document.getElementById("orderText").value =
+                payment.orderText;
+
+            document.getElementById("copyButton")
+                .addEventListener("click", async () => {
+                    const orderText =
+                        document.getElementById("orderText");
+
+                    try {
+                        await navigator.clipboard.writeText(
+                            orderText.value
+                        );
+
+                        document.getElementById("copyButton")
+                            .textContent = "Copied Successfully!";
+
+                    } catch {
+                        orderText.select();
+                        document.execCommand("copy");
+
+                        document.getElementById("copyButton")
+                            .textContent = "Copied Successfully!";
+                    }
+                });
+
+            document.getElementById("messengerButton")
+                .addEventListener("click", () => {
+                    window.open(
+                        MESSENGER_URL,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+                });
+        }
+
+        displayOrder();
+    </script>
+
+</body>
+</html>

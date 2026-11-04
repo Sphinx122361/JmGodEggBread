@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Result | JM God Egg Bread</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #f4f7fb;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        .result-box {
+            width: 100%;
+            max-width: 450px;
+            padding: 35px 25px;
+            background: white;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: #e5f8ec;
+            color: #20a65a;
+            font-size: 48px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 28px;
+            color: #20a65a;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .demo-label {
+            display: inline-block;
+            padding: 6px 15px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            background: #fff1d6;
+            color: #a66a00;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .amount-section {
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f0f7ff;
+            border-radius: 15px;
+        }
+
+        .amount-section p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .amount-section h2 {
+            margin-top: 5px;
+            color: #007dce;
+            font-size: 32px;
+        }
+
+        .details {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        .detail-row span:first-child {
+            color: #777;
+        }
+
+        .detail-row span:last-child {
+            text-align: right;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .paid-status {
+            color: #20a65a;
+        }
+
+        .back-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #007dce;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #0066aa;
+        }
+
+        .school-note {
+            margin-top: 18px;
+            color: #999;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .error-message {
+            color: #c0392b;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="result-box">
+
+        <div class="success-icon" id="successIcon">✓</div>
+
+        <h1 id="resultTitle">Payment Successful!</h1>
+
+        <p class="subtitle" id="resultSubtitle">
+            Your payment has been completed successfully.
+        </p>
+
+        <span class="demo-label" id="demoLabel">
+            GCASH TRANSACTION
+        </span>
+
+        <div id="resultContent">
+
+            <div class="amount-section">
+                <p>Total Amount Paid</p>
+                <h2 id="totalAmount">₱0.00</h2>
+            </div>
+
+            <div class="details">
+
+                <div class="detail-row">
+                    <span>Order Number</span>
+                    <span id="orderNumber">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Customer</span>
+                    <span id="customerName">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Quantity</span>
+                    <span id="quantity">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Payment Method</span>
+                    <span id="paymentMethod">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Payment Status</span>
+                    <span class="paid-status">PAID</span>
+                </div>
+
+            </div>
+
+            <a href="index.html" class="back-btn">
+                Back to Home
+            </a>
+
+        </div>
+
+        <p class="school-note">
+            This is a simulated payment transaction for educational
+            purposes only. No real money was transferred.
+        </p>
+
+    </main>
+
+    
+
+<script>
+    const resultContent = document.getElementById("resultContent");
+
+    function showPaymentError() {
+        document.getElementById("successIcon").textContent = "!";
+        document.getElementById("successIcon").style.background = "#fdeaea";
+        document.getElementById("successIcon").style.color = "#c0392b";
+
+        document.getElementById("resultTitle").textContent =
+            "Payment Not Found";
+
+        document.getElementById("resultTitle").style.color = "#c0392b";
+
+        document.getElementById("resultSubtitle").textContent =
+            "We could not find your order.";
+
+        document.getElementById("demoLabel").hidden = true;
+
+        resultContent.innerHTML = `
+            <p class="error-message">
+                Please complete your order first.
+            </p>
+
+            <a href="order.html" class="back-btn">
+                Return to Order
+            </a>
+        `;
+    }
+
+    function displayPayment() {
+        let payment;
+
+        try {
+            payment = JSON.parse(
+                sessionStorage.getItem("demoPayment")
+            );
+        } catch {
+            showPaymentError();
+            return;
+        }
+
+        if (
+            !payment ||
+            !["PAID", "CASH ON DELIVERY"].includes(payment.status) ||
+            !Number.isFinite(Number(payment.total)) ||
+            !payment.orderNumber ||
+            !payment.customerName
+        ) {
+            showPaymentError();
+            return;
+        }
+
+        const isCOD =
+            payment.paymentMethod === "Cash on Delivery";
+
+        document.getElementById("totalAmount").textContent =
+            `₱${Number(payment.total).toFixed(2)}`;
+
+        document.getElementById("orderNumber").textContent =
+            payment.orderNumber;
+
+        document.getElementById("customerName").textContent =
+            payment.customerName;
+
+        document.getElementById("quantity").textContent =
+            payment.quantity;
+
+        document.getElementById("paymentMethod").textContent =
+            payment.paymentMethod === "GCash Demo"
+                ? "GCash"
+                : payment.paymentMethod;
+
+        const title = document.getElementById("resultTitle");
+        const subtitle = document.getElementById("resultSubtitle");
+        const label = document.getElementById("demoLabel");
+        const icon = document.getElementById("successIcon");
+        const status = document.querySelector(".paid-status");
+        const amountTitle = document.querySelector(".amount-section p");
+
+        if (isCOD) {
+            title.textContent = "Order Confirmed!";
+            title.style.color = "#20a65a";
+
+            subtitle.textContent =
+                "Your order has been placed successfully. Please prepare your payment upon delivery.";
+
+            label.textContent = "CASH ON DELIVERY";
+            label.style.background = "#e5f8ec";
+            label.style.color = "#208044";
+
+            amountTitle.textContent = "Total Amount to Pay";
+
+            status.textContent = "PAYMENT UPON DELIVERY";
+            status.style.color = "#007dce";
+        } else {
+            title.textContent = "Payment Successful!";
+            subtitle.textContent =
+                "Your payment has been completed successfully.";
+
+            label.textContent = "GCASH TRANSACTION";
+
+            amountTitle.textContent = "Total Amount Paid";
+
+            status.textContent = "PAID";
+            status.style.color = "#20a65a";
+        }
+    }
+
+    displayPayment();
+</script>
+
+
+
+</body>
+</html>

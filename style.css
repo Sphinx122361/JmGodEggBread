@@ -730,46 +730,71 @@ h1 {
 
 
 
-.gcash-payment {
-    margin: 20px 0;
+
+
+
+
+
+
+
+
+
+
+
+.gcash-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    background: #f1f7ff;
-    border: 1px solid #c8ddf5;
-    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.65);
 }
 
-.gcash-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.gcash-modal[hidden] {
+    display: none !important;
+}
+
+.gcash-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: gcashPopup 0.3s ease;
+}
+
+.gcash-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    background: none;
+    color: #555;
+    font-size: 28px;
+    cursor: pointer;
 }
 
 .gcash-header h2 {
-    margin: 0;
+    margin: 0 0 20px;
     color: #007dce;
-}
-
-.gcash-header span {
-    padding: 5px 12px;
-    background: #dceeff;
-    color: #007dce;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.gcash-note {
-    font-size: 12px;
-    color: #555;
-    line-height: 1.6;
+    font-family: "Fredoka", sans-serif;
 }
 
 .gcash-details {
     margin: 20px 0;
-    padding: 18px;
-    background: white;
+    padding: 20px;
     border-radius: 12px;
+    background: #f1f7ff;
     text-align: center;
+}
+
+.gcash-details h3 {
+    color: #007dce;
 }
 
 .gcash-details p {
@@ -778,28 +803,28 @@ h1 {
     font-size: 13px;
 }
 
-.gcash-details h3 {
-    color: #007dce;
-}
-
 .gcash-details h2 {
     color: #007dce;
-    font-size: 28px;
+    font-size: 30px;
 }
 
 .gcash-instruction {
+    margin-bottom: 20px;
+    color: #555;
     font-size: 13px;
     text-align: center;
 }
 
 .gcash-confirm-btn {
     width: 100%;
+    min-height: 45px;
     padding: 13px;
-    background: #007dce;
-    color: white;
     border: none;
     border-radius: 10px;
+    background: #007dce;
+    color: white;
     font-family: inherit;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
 }
@@ -809,7 +834,27 @@ h1 {
 }
 
 #paymentStatus {
+    margin-top: 15px;
     text-align: center;
     font-weight: 600;
     font-size: 13px;
+}
+
+@keyframes gcashPopup {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .gcash-modal-content {
+        max-width: 100%;
+        padding: 25px 20px;
+    }
 }

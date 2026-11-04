@@ -17,10 +17,11 @@
         <h1>Order EggyBite</h1>
 
         <p class="order-intro">
-            Enjoy our delicious EggyBite for only ₱20 each!
+            Enjoy our delicious EggyBite for only ₱15 each!
         </p>
 
         <form id="orderForm">
+
             <label for="customerName">Your name</label>
             <input
                 type="text"
@@ -52,9 +53,58 @@
                 required
             >
 
-            <button type="submit" class="order-btn">
+            <label for="paymentMethod">Payment Method</label>
+
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="" disabled selected>
+                    Select Payment Method
+                </option>
+
+                <option value="GCash Demo">
+                    GCash
+                </option>
+
+                <option value="Cash on Pickup">
+                    Cash on Delivery
+                </option>
+            </select>
+
+            <div id="gcashPayment" class="gcash-payment" hidden>
+
+                <div class="gcash-header">
+                    <h2>GCash Payment</h2>
+                    
+                </div>
+
+                
+
+                <div class="gcash-details">
+                    <h3>JM God Egg Bread</h3>
+
+                    <p>Amount to Pay</p>
+                    <h2 id="gcashAmount">₱0.00</h2>
+                </div>
+
+                <p class="gcash-instruction">
+                    Click the button below to simulate a successful payment.
+                </p>
+
+                <button
+                    type="button"
+                    id="confirmPayment"
+                    class="gcash-confirm-btn"
+                >
+                    Confirm Payment
+                </button>
+
+                <p id="paymentStatus" role="status"></p>
+
+            </div>
+
+            <button type="submit" class="order-btn" id="orderButton">
                 Order Us
             </button>
+
         </form>
 
         <p id="orderMessage" role="status" aria-live="polite"></p>
@@ -72,6 +122,7 @@
         </p>
 
         <a href="index.html" class="back-button">← Back to Home</a>
+
     </main>
 
 </body>

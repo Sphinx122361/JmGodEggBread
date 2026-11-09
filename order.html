@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
 
     <title>Order EggyBite | JM God Egg Bread</title>
 
@@ -19,54 +21,67 @@
         <h1>Order EggyBite</h1>
 
         <p class="order-intro">
-            Enjoy our delicious EggyBite for only ₱15 each!
+            Original EggyBite – ₱15 each<br>
+            CheggyBitee – ₱17 each
         </p>
 
         <form id="orderForm">
 
-            <label for="customerName">Your name</label>
+            <label for="customerName">Your Name</label>
             <input
                 type="text"
                 id="customerName"
                 name="customerName"
                 placeholder="Your Name"
                 autocomplete="name"
+                maxlength="100"
                 required
             >
 
-            <label for="quantity">Quantity</label>
+            <label for="originalQuantity">Original EggyBite (₱15)</label>
             <input
                 type="number"
-                id="quantity"
-                name="quantity"
+                id="originalQuantity"
+                name="originalQuantity"
                 placeholder="Quantity"
-                min="1"
+                min="0"
                 step="1"
                 inputmode="numeric"
+                value="0"
                 required
             >
 
-            <label for="orderDetails">Pickup location or instructions</label>
+            <label for="cheggyQuantity">CheggyBitee (₱17)</label>
+            <input
+                type="number"
+                id="cheggyQuantity"
+                name="cheggyQuantity"
+                placeholder="Quantity"
+                min="0"
+                step="1"
+                inputmode="numeric"
+                value="0"
+                required
+            >
+
+            <label for="orderDetails">
+                Pickup Location or Instructions
+            </label>
+
             <input
                 type="text"
                 id="orderDetails"
                 name="orderDetails"
                 placeholder="Pickup Location or Instructions"
+                maxlength="300"
                 required
             >
 
-            <label for="paymentMethod">Payment Method</label>
-
-            <select id="paymentMethod" name="paymentMethod" required>
-                <option value="" disabled selected>
-                    Select Payment Method
-                </option>
-
-                
-                <option value="Cash on Pickup">Cash on Delivery</option>
-            </select>
-
-            <button type="submit" class="order-btn" id="orderButton">
+            <button
+                type="submit"
+                class="order-btn"
+                id="orderButton"
+            >
                 Order Us
             </button>
 
@@ -74,64 +89,11 @@
 
         <p id="orderMessage" role="status" aria-live="polite"></p>
 
-        <div id="orderSummary" class="order-summary" hidden></div>
-
-        <button type="button" id="copyOrder" class="copy-order-btn" hidden>
-            Copy Order Details
-        </button>
-
-        
-
         <a href="index.html" class="back-button">
             ← Back to Home
         </a>
 
     </main>
 
-    <div id="gcashPayment" class="gcash-modal" hidden>
-
-        <div class="gcash-modal-content">
-
-            <button
-                type="button"
-                id="closeGcash"
-                class="gcash-close"
-                aria-label="Close payment popup"
-            >
-                ×
-            </button>
-
-            <div class="gcash-header">
-                <h2>GCash Payment</h2>
-            </div>
-
-            <div class="gcash-details">
-
-                <h3>JM God Egg Bread</h3>
-
-                <p>Amount to Pay</p>
-
-                <h2 id="gcashAmount">₱0.00</h2>
-
-            </div>
-
-
-
-            <button
-                type="button"
-                id="confirmPayment"
-                class="gcash-confirm-btn"
-            >
-                Confirm Payment
-            </button>
-
-            <p id="paymentStatus" role="status"></p>
-
-        </div>
-
-    </div>
-
 </body>
 </html>
-
-

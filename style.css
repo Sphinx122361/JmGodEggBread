@@ -858,3 +858,46 @@ h1 {
         padding: 25px 20px;
     }
 }
+
+
+
+.innovatedd {
+    width: 100%;
+    max-width: 800px;
+    margin: 35px auto;
+    padding: 25px;
+    border: 2px solid var(--white);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 12px rgba(107, 62, 38, 0.12);
+    text-align: center;
+}
+
+.innovatedd h2 {
+    margin-bottom: 25px;
+    color: var(--orange);
+    font-family: "Lilita One", sans-serif;
+    font-size: 30px;
+}
+
+.innovatedd p {
+    color: var(--brown);
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+@media (max-width: 600px) {
+    .innovatedd {
+        margin: 22px auto;
+        padding: 15px;
+    }
+
+    .innovatedd h2 {
+        font-size: 25px;
+    }
+
+    .innovatedd p {
+        font-size: 14px;
+    }
+}

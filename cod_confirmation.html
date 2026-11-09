@@ -1,9 +1,11 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
 
     <title>Order Confirmation | JM God Egg Bread</title>
 
@@ -112,6 +114,7 @@
         }
 
         .detail-row span:last-child {
+            max-width: 60%;
             text-align: right;
             font-weight: 600;
             overflow-wrap: anywhere;
@@ -188,6 +191,20 @@
             line-height: 1.6;
             margin: 20px 0;
         }
+
+        @media (max-width: 400px) {
+            .result-box {
+                padding: 28px 18px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .amount-section h2 {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 
@@ -226,8 +243,33 @@
                 </div>
 
                 <div class="detail-row">
-                    <span>Quantity</span>
+                    <span>Original EggyBite</span>
+                    <span id="originalProduct">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Original Subtotal</span>
+                    <span id="originalSubtotal">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>CheggyBitee</span>
+                    <span id="cheggyProduct">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Cheggy Subtotal</span>
+                    <span id="cheggySubtotal">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Total Quantity</span>
                     <span id="quantity">---</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>Pickup Details</span>
+                    <span id="pickupDetails">---</span>
                 </div>
 
                 <div class="detail-row">
@@ -280,25 +322,30 @@
     <script>
         const MESSENGER_URL = "https://m.me/61594116885367";
 
-        const payment = JSON.parse(
-            sessionStorage.getItem("codOrder") || "null"
-        );
+        const ORIGINAL_PRICE = 15;
+        const CHEGGY_PRICE = 17;
 
-        const resultContent =
-            document.getElementById("resultContent");
+        const $ = id => document.getElementById(id);
+
+        let payment = null;
+
+        try {
+            payment = JSON.parse(
+                sessionStorage.getItem("codOrder") || "null"
+            );
+        } catch {
+            payment = null;
+        }
 
         function showError() {
-            document.getElementById("successIcon").textContent = "!";
-            document.getElementById("successIcon").style.background = "#fdeaea";
-            document.getElementById("successIcon").style.color = "#c0392b";
+            $("successIcon").textContent = "!";
+            $("successIcon").style.background = "#fdeaea";
+            $("successIcon").style.color = "#c0392b";
 
-            document.getElementById("resultTitle").textContent =
-                "Order Not Found";
+            $("resultTitle").textContent = "Order Not Found";
+            $("resultTitle").style.color = "#c0392b";
 
-            document.getElementById("resultTitle").style.color =
-                "#c0392b";
-
-            resultContent.innerHTML = `
+            $("resultContent").innerHTML = `
                 <p class="error-message">
                     We could not find your order.
                     Please place your order first.
@@ -310,65 +357,115 @@
             `;
         }
 
-        function displayOrder() {
+        function isValidOrder(order) {
+            if (!order || typeof order !== "object") {
+                return false;
+            }
+
+            const originalQty = order.originalQuantity;
+            const cheggyQty = order.cheggyQuantity;
+
             if (
-                !payment ||
-                payment.status !== "UNPAID" ||
-                payment.paymentMethod !== "Cash on Delivery" ||
-                !Number.isFinite(Number(payment.total)) ||
-                !payment.orderNumber ||
-                !payment.customerName ||
-                !payment.quantity
+                order.status !== "UNPAID" ||
+                order.paymentMethod !== "Cash on Delivery" ||
+                typeof order.orderNumber !== "string" ||
+                !order.orderNumber ||
+                typeof order.customerName !== "string" ||
+                !order.customerName.trim() ||
+                typeof order.details !== "string" ||
+                !order.details.trim() ||
+                !Number.isSafeInteger(originalQty) ||
+                !Number.isSafeInteger(cheggyQty) ||
+                originalQty < 0 ||
+                cheggyQty < 0
             ) {
+                return false;
+            }
+
+            const originalTotal = originalQty * ORIGINAL_PRICE;
+            const cheggyTotal = cheggyQty * CHEGGY_PRICE;
+            const totalQuantity = originalQty + cheggyQty;
+            const total = originalTotal + cheggyTotal;
+
+            return (
+                Number.isSafeInteger(totalQuantity) &&
+                totalQuantity > 0 &&
+                order.quantity === totalQuantity &&
+                order.originalTotal === originalTotal &&
+                order.cheggyTotal === cheggyTotal &&
+                order.total === total &&
+                Number.isSafeInteger(total)
+            );
+        }
+
+        function displayOrder() {
+
+            if (!isValidOrder(payment)) {
                 showError();
                 return;
             }
 
-            document.getElementById("totalAmount").textContent =
-                `₱${Number(payment.total).toFixed(2)}`;
+            $("totalAmount").textContent =
+                `₱${payment.total.toFixed(2)}`;
 
-            document.getElementById("orderNumber").textContent =
+            $("orderNumber").textContent =
                 payment.orderNumber;
 
-            document.getElementById("customerName").textContent =
+            $("customerName").textContent =
                 payment.customerName;
 
-            document.getElementById("quantity").textContent =
+            $("originalProduct").textContent =
+                `${payment.originalQuantity} × ₱${ORIGINAL_PRICE}`;
+
+            $("originalSubtotal").textContent =
+                `₱${payment.originalTotal.toFixed(2)}`;
+
+            $("cheggyProduct").textContent =
+                `${payment.cheggyQuantity} × ₱${CHEGGY_PRICE}`;
+
+            $("cheggySubtotal").textContent =
+                `₱${payment.cheggyTotal.toFixed(2)}`;
+
+            $("quantity").textContent =
                 payment.quantity;
 
-            document.getElementById("orderText").value =
-                payment.orderText;
+            $("pickupDetails").textContent =
+                payment.details;
 
-            document.getElementById("copyButton")
-                .addEventListener("click", async () => {
-                    const orderText =
-                        document.getElementById("orderText");
+            $("orderText").value =
+                payment.orderText || "";
 
-                    try {
-                        await navigator.clipboard.writeText(
-                            orderText.value
-                        );
+            $("copyButton").addEventListener("click", copyOrder);
 
-                        document.getElementById("copyButton")
-                            .textContent = "Copied Successfully!";
+            $("messengerButton").addEventListener("click", () => {
+                window.open(
+                    MESSENGER_URL,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+            });
+        }
 
-                    } catch {
-                        orderText.select();
-                        document.execCommand("copy");
+        async function copyOrder() {
+            const orderText = $("orderText");
+            const copyButton = $("copyButton");
 
-                        document.getElementById("copyButton")
-                            .textContent = "Copied Successfully!";
-                    }
-                });
+            try {
+                await navigator.clipboard.writeText(
+                    orderText.value
+                );
 
-            document.getElementById("messengerButton")
-                .addEventListener("click", () => {
-                    window.open(
-                        MESSENGER_URL,
-                        "_blank",
-                        "noopener,noreferrer"
-                    );
-                });
+                copyButton.textContent = "Copied Successfully!";
+
+            } catch {
+                orderText.select();
+
+                const copied = document.execCommand("copy");
+
+                copyButton.textContent = copied
+                    ? "Copied Successfully!"
+                    : "Please Copy Manually";
+            }
         }
 
         displayOrder();
